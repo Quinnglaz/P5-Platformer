@@ -5,11 +5,15 @@ var yvel = 20;
 
 var oldTime = 0;
 
+var character;
+
 var platforms = [
     {x: 0, y: 380, w: 400, h: 20},
     {x: 100, y: 320, w: 60, h: 20},
     {x: 180, y: 260, w: 60, h: 20},
 ];
+
+var test = [8, 20];
 
 function preload()
 {
@@ -19,6 +23,8 @@ function preload()
 function setup()
 {
     createCanvas(400, 400);
+
+    character = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW});
 }
 
 function draw()
@@ -32,7 +38,7 @@ function draw()
 
     background(0);
     fill("red");
-    rect(x, y, 20, 20);
+    rect(character.x, character.y, character.w, character.h);
 
     fill("blue");
     for(var i = 0; i < platforms.length; i++)
@@ -43,35 +49,7 @@ function draw()
 
 function update()
 {
-    //xvel++;
-    if(keyIsDown(RIGHT_ARROW))
-        xvel++;
-    if(keyIsDown(LEFT_ARROW))
-        xvel--;
-    x += xvel;
-    xvel *= 0.9;
-    if(checkAllCollisions(platforms))
-    {
-        while(checkAllCollisions(platforms))
-        {
-            x -= Math.abs(xvel) / xvel;
-        }
-        xvel = 0;
-    }
-
-    yvel += 1;
-    y += yvel;
-    if(checkAllCollisions(platforms))
-    {
-        while(checkAllCollisions(platforms))
-        {
-            y -= Math.abs(yvel) / yvel;
-        }
-        if(keyIsDown(UP_ARROW) && Math.abs(yvel) / yvel > 0)
-            yvel = -12;
-        else
-            yvel = 0;
-    }
+    character.update();
 }
 
 function collision(obj1, obj2)
@@ -86,11 +64,11 @@ function collision(obj1, obj2)
     return false;
 }
 
-function checkAllCollisions(list)
+function checkAllCollisions(entity, list)
 {
     for(var i = 0; i < list.length; i++)
     {
-        if(collision({x: x, y: y, w: 20,h: 20}, list[i]))
+        if(collision(entity, list[i]))
         {
             i = list.length;
             return true;
