@@ -5,7 +5,10 @@ var yvel = 20;
 
 var oldTime = 0;
 
-var character;
+var player1;
+var player2;
+
+var projectiles = [];
 
 var platforms = [
     {x: 0, y: 380, w: 400, h: 20},
@@ -24,7 +27,8 @@ function setup()
 {
     createCanvas(400, 400);
 
-    character = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW});
+    player1 = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW, shoot: 97});
+    player2 = new player(100, 20, 20, 20, {up: 87, down: 83, left: 65, right: 68, shoot: 70});
 }
 
 function draw()
@@ -38,18 +42,27 @@ function draw()
 
     background(0);
     fill("red");
-    rect(character.x, character.y, character.w, character.h);
+    rect(player1.x, player1.y, player1.w, player1.h);
 
     fill("blue");
-    for(var i = 0; i < platforms.length; i++)
+    rect(player2.x, player2.y, player2.w, player2.h);
+
+    fill("blue");
+    for(let i = 0; i < platforms.length; i++)
     {
         rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
     }
+
+    for(let i = 0; i < projectiles.length; i++)
+        rect(projectiles[i].x, projectiles[i].y, projectiles[i].w, projectiles[i].h);
 }
 
 function update()
 {
-    character.update();
+    player1.update();
+    player2.update();
+    for(let i = 0; i < projectiles.length; i++)
+        projectiles[i].update();
 }
 
 function collision(obj1, obj2)
@@ -66,7 +79,7 @@ function collision(obj1, obj2)
 
 function checkAllCollisions(entity, list)
 {
-    for(var i = 0; i < list.length; i++)
+    for(let i = 0; i < list.length; i++)
     {
         if(collision(entity, list[i]))
         {

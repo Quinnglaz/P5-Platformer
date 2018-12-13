@@ -1,6 +1,6 @@
 class entity
 {
-    constructor(x, y, w, h)
+    constructor(x, y, w, h, xvel = 0, yvel = 0)
     {
         this.x = x;
         this.y = y;
@@ -45,17 +45,31 @@ class player extends entity
     constructor(x, y, w, h, controls)
     {
         super(x, y, w, h);
+        this.dir = 90;
         this.controls = controls;
     }
 
     update()
     {
         if(keyIsDown(this.controls.left))
+        {
             this.xvel--;
+            this.dir = Math.PI;
+        }
         if(keyIsDown(this.controls.right))
+        {
             this.xvel++;
-        if(keyIsDown(this.controls.up) && this.inGround)
-            this.yvel = -12;
+            this.dir = 0;
+        }
+        if(keyIsDown(this.controls.up))
+        {
+            if(this.inGround)
+                this.yvel = -12;
+        }
+
+        if(keyIsDown(this.controls.shoot))
+            projectiles.push(new entity(this.x, this.y, 10, 10, Math.cos(this.dir) * 25, -15));
+
         super.update();
     }
 }
