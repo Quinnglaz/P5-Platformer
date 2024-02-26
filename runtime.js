@@ -44,7 +44,7 @@ function draw()
     fill("red");
     rect(player1.x, player1.y, player1.w, player1.h);
 
-    fill("blue");
+    fill("yellow");
     rect(player2.x, player2.y, player2.w, player2.h);
 
     fill("blue");
