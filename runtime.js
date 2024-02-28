@@ -11,7 +11,7 @@ var player2;
 var projectiles = [];
 
 var platforms = [
-    {x: 0, y: 380, w: 400, h: 20},
+    {x: 0, y: 380, w: 1000, h: 20},
     {x: 100, y: 320, w: 60, h: 20},
     {x: 180, y: 260, w: 60, h: 20},
 ];
@@ -25,9 +25,9 @@ function preload()
 
 function setup()
 {
-    createCanvas(400, 400);
+    createCanvas(800, 800);
 
-    player1 = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW, shoot: 97});
+    player1 = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW, shoot: 90});
     player2 = new player(100, 20, 20, 20, {up: 87, down: 83, left: 65, right: 68, shoot: 70});
 }
 

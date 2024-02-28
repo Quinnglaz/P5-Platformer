@@ -68,7 +68,7 @@ class player extends entity
         }
 
         if(keyIsDown(this.controls.shoot))
-            projectiles.push(new entity(this.x, this.y, 10, 10, Math.cos(this.dir) * 25, -15));
+            projectiles.push(new entity(this.x, this.y, 12, 7, Math.cos(this.dir) * 100, -2));
 
         super.update();
     }
