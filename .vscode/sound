@@ -1,0 +1,7 @@
+let run 
+
+
+function preload() { 
+    soundformats("mp3")
+    run = loadSound()
+}
