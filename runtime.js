@@ -37,7 +37,7 @@ function setup()
     createCanvas(800, 800);
 
     player1 = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW, shoot: 90});
-    player2 = new player(100, 20, 20, 20, {up: 87, down: 83, left: 65, right: 68, shoot: 70});
+    player2 = new player(720, 20, 20, 20, {up: 87, down: 83, left: 65, right: 68, shoot: 70});
 }
 
 function draw()
