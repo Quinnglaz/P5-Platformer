@@ -40,35 +40,40 @@ class entity
     }
 }
 
-class player extends entity
-{
-    constructor(x, y, w, h, controls)
-    {
+class player extends entity {
+    constructor(x, y, w, h, controls) {
         super(x, y, w, h);
         this.dir = 90;
         this.controls = controls;
+        this.shootCooldown = 0; // Initialize the cooldown timer
+        this.shootInterval = 30; // Cooldown interval (in frames)
     }
 
-    update()
-    {
-        if(keyIsDown(this.controls.left))
-        {
+    update() {
+        // Reduce the cooldown timer
+        if (this.shootCooldown > 0) {
+            this.shootCooldown--;
+        }
+
+        // Shooting logic with cooldown
+        if (keyIsDown(this.controls.shoot) && this.shootCooldown === 0) {
+            projectiles.push(new entity(this.x, this.y, 12, 7, Math.cos(this.dir) * 100, -2));
+            this.shootCooldown = this.shootInterval; // Reset cooldown timer
+        }
+
+        // Other movement logic
+        if (keyIsDown(this.controls.left)) {
             this.xvel--;
             this.dir = Math.PI;
         }
-        if(keyIsDown(this.controls.right))
-        {
+        if (keyIsDown(this.controls.right)) {
             this.xvel++;
             this.dir = 0;
         }
-        if(keyIsDown(this.controls.up))
-        {
-            if(this.inGround)
+        if (keyIsDown(this.controls.up)) {
+            if (this.inGround)
                 this.yvel = -12;
         }
-
-        if(keyIsDown(this.controls.shoot))
-            projectiles.push(new entity(this.x, this.y, 12, 7, Math.cos(this.dir) * 100, -2));
 
         super.update();
     }

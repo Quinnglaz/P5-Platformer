@@ -23,6 +23,7 @@ var platforms = [
     {x: 75, y: 500, w: 20, h: 60},
     {x: 660, y: 500, w: 20, h: 60},
     {x: 600, y: 480, w: 60, h: 20},
+    {x: 150, y: 600, w: 60, h: 50},
 ];
 
 var test = [8 ,20];
@@ -56,7 +57,7 @@ function draw()
     fill("yellow");
     rect(player2.x, player2.y, player2.w, player2.h);
 
-    fill("blue");
+    fill("lime");
     for(let i = 0; i < platforms.length; i++)
     {
         rect(platforms[i].x, platforms[i].y, platforms[i].w, platforms[i].h);
