@@ -26,7 +26,7 @@ function draw() {
 
 function keyPressed() {
   // Check if the "Arrow Up" key is pressed and the button is selected
-  if (keyCode === UP_ARROW && button.selected) {
+  if (keyCode === UP_ARROW) {
     playSound(); // Call playSound function when the "Arrow Up" key is pressed and the button is selected
   }
 }
