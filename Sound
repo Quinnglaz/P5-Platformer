@@ -1,18 +1,44 @@
 let sound;
+let button;
 
 function preload() {
-  // Load the sound file
-  sound = loadSound('jump.ogg');
+  soundFormats('ogg'); // Specify the format of the sound file
+  sound = loadSound('Jump.ogg'); // Load the sound file
 }
 
-function setup() {
-  createCanvas(400, 400);
-  // Add a button to trigger the sound
-  let button = UP_ARROW('Play Sound');
-  button.mousePressed(playSound);
+
+
+function draw() {
+  // Highlight the button when it's selected
+  if (button.selected) {
+    button.style('background-color', 'yellow');
+  } else {
+    button.style('background-color', '');
+  }
+}
+
+function keyPressed() {
+  // Check if the "Arrow Up" key is pressed
+  if (keyCode === UP_ARROW) {
+    button.selected = true;
+  }
+}
+
+function keyReleased() {
+  // Check if the "Arrow Up" key is released
+  if (keyCode === UP_ARROW) {
+    button.selected = false;
+    playSound(); // Call playSound function when the "Arrow Up" key is released
+  }
 }
 
 function playSound() {
-  // Play the loaded sound
-  sound.play();
+  if (sound.isPlaying()) { // Check if the sound is already playing
+    sound.stop(); // If it's playing, stop it
+  } else {
+    sound.play(); // If it's not playing, play it
+  }
 }
+
+
+
