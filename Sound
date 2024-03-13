@@ -6,7 +6,14 @@ function preload() {
   sound = loadSound('Jump.ogg'); // Load the sound file
 }
 
-
+function setup() {
+  createCanvas(400, 400);
+  
+  // Create a button
+  button = createButton('Play Sound');
+  button.position(10, 10);
+  button.mousePressed(playSound); // Call playSound function when button is pressed
+}
 
 function draw() {
   // Highlight the button when it's selected
@@ -18,27 +25,19 @@ function draw() {
 }
 
 function keyPressed() {
-  // Check if the "Arrow Up" key is pressed
-  if (keyCode === UP_ARROW) {
-    button.selected = true;
-  }
-}
-
-function keyReleased() {
-  // Check if the "Arrow Up" key is released
-  if (keyCode === UP_ARROW) {
-    button.selected = false;
-    playSound(); // Call playSound function when the "Arrow Up" key is released
+  // Check if the "Arrow Up" key is pressed and the button is selected
+  if (keyCode === UP_ARROW && button.selected) {
+    playSound(); // Call playSound function when the "Arrow Up" key is pressed and the button is selected
   }
 }
 
 function playSound() {
   if (sound.isPlaying()) { // Check if the sound is already playing
     sound.stop(); // If it's playing, stop it
-  } else {
-    sound.play(); // If it's not playing, play it
   }
+  sound.play(); // Play the sound
 }
+
 
 
 
