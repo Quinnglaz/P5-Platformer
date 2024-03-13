@@ -6,24 +6,6 @@ function preload() {
   sound = loadSound('Jump.ogg'); // Load the sound file
 }
 
-function setup() {
-  createCanvas(400, 400);
-  
-  // Create a button
-  button = createButton('Play Sound');
-  button.position(10, 10);
-  button.mousePressed(playSound); // Call playSound function when button is pressed
-}
-
-function draw() {
-  // Highlight the button when it's selected
-  if (button.selected) {
-    button.style('background-color', 'yellow');
-  } else {
-    button.style('background-color', '');
-  }
-}
-
 function keyPressed() {
   playSound();
   // Check if the "Arrow Up" key is pressed and the button is selected
