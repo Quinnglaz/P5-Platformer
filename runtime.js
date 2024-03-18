@@ -1,3 +1,4 @@
+
 // 1. Variable Declarations and Initialization
 var x = 20;
 var y = 20;
@@ -21,25 +22,19 @@ var platforms = [
     {x: 660, y: 500, w: 20, h: 60},
     {x: 600, y: 480, w: 60, h: 20},
     {x: 355, y: 400, w: 60, h: 50},
-    {x: 660, y: 500, w: 20, h: 60},
+    {x: 50, y: 290, w: 100, h: 20},
     {x: 600, y: 480, w: 60, h: 20},
     {x: 355, y: 400, w: 60, h: 50},
 ];
 var test = [8, 20];
 
-// 2. Preload Function
-function preload() {
-    // Empty preload function
-}
 
-// 3. Setup Function
 function setup() {
     createCanvas(800, 800);
     player1 = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW, shoot: 90});
     player2 = new player(720, 20, 20, 20, {up: 87, down: 83, left: 65, right: 68, shoot: 70});
 }
 
-// 4. Draw Function
 function draw() {
     dt = Date.now() - oldTime;
     if (dt > 17) {
@@ -48,8 +43,17 @@ function draw() {
     }
 
     background(0);
+
+    player1.update();
+    player2.update();
+
     fill("red");
     rect(player1.x, player1.y, player1.w, player1.h);
+
+    fill("white");
+    textSize(20);
+    text("Player 1 Health: " + player1.health, 10, 30);
+    text("Player 2 Health: " + player2.health, 650, 30);
 
     fill("yellow");
     rect(player2.x, player2.y, player2.w, player2.h);
@@ -64,16 +68,12 @@ function draw() {
     }
 }
 
-// 5. Update Function
 function update() {
-    player1.update();
-    player2.update();
     for (let i = 0; i < projectiles.length; i++) {
         projectiles[i].update();
     }
 }
 
-// 6. Collision Functions
 function collision(obj1, obj2) {
     if (obj1.x < (obj2.x + obj2.w) && obj2.x < (obj1.x + obj1.w)) {
         if (obj1.y < (obj2.y + obj2.h) && obj2.y < (obj1.y + obj1.h)) {
@@ -93,7 +93,6 @@ function checkAllCollisions(entity, list) {
     return false;
 }
 
-// 7. Entity Class
 class entity {
     constructor(x, y, w, h, xvel = 0, yvel = 0) {
         this.x = x;
@@ -129,7 +128,6 @@ class entity {
     }
 }
 
-// 8. Player Class
 class player extends entity {
     constructor(x, y, w, h, controls) {
         super(x, y, w, h);
@@ -137,11 +135,24 @@ class player extends entity {
         this.controls = controls;
         this.shootCooldown = 0; // Initialize the cooldown timer
         this.shootInterval = 30; // Cooldown interval (in frames)
+        this.health = 3;
     }
 
     update() {
         if (this.shootCooldown > 0) {
             this.shootCooldown--;
+        }
+
+        for (let i = 0; i < projectiles.length; i++) {
+            if (collision(this, projectiles[i])) {
+                this.health--; // Decrease health points if hit by a projectile
+                projectiles.splice(i, 1); // Remove the projectile
+                i--; // Adjust index after removal
+            }
+        }
+
+        if (this.health <= 0) {
+            // Player is defeated - add game over logic here
         }
 
         if (keyIsDown(this.controls.shoot) && this.shootCooldown === 0) {
@@ -166,3 +177,5 @@ class player extends entity {
         super.update();
     }
 }
+
+ 
