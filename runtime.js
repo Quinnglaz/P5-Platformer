@@ -29,6 +29,8 @@ var platforms = [
 var test = [8, 20];
 
 
+
+
 function setup() {
     createCanvas(800, 800);
     player1 = new player(20, 20, 20, 20, {up: UP_ARROW, down: DOWN_ARROW, left: LEFT_ARROW, right: RIGHT_ARROW, shoot: 90});
@@ -36,6 +38,7 @@ function setup() {
 }
 
 function draw() {
+    //sample1.play();
     dt = Date.now() - oldTime;
     if (dt > 17) {
         oldTime = Date.now();
@@ -52,8 +55,8 @@ function draw() {
 
     fill("white");
     textSize(20);
-    text("Player 1 Health: " + player1.health, 10, 30);
-    text("Player 2 Health: " + player2.health, 650, 30);
+    text("Player 1 Health: " + player1.health, 20, 30);
+    text("Player 2 Health: " + player2.health, 585, 30);
 
     fill("yellow");
     rect(player2.x, player2.y, player2.w, player2.h);
@@ -65,6 +68,13 @@ function draw() {
 
     for (let i = 0; i < projectiles.length; i++) {
         rect(projectiles[i].x, projectiles[i].y, projectiles[i].w, projectiles[i].h);
+    }
+
+    // Check for game over condition and change background color
+    if (player1.health <= 0) {
+        background("yellow");
+    } else if (player2.health <= 0) {
+        background("red");
     }
 }
 
