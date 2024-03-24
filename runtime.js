@@ -73,11 +73,36 @@ function draw() {
     // Check for game over condition and change background color
     if (player1.health <= 0) {
         background("yellow");
+        fill("blue")
+        textSize(40);
+        text("Yellow wins. Press R to restart", 160, 360)
     } else if (player2.health <= 0) {
         background("red");
+        fill("blue")
+        textSize(40);
+        text("Red wins. Press R to restart", 160, 360)
     }
 }
+function keyPressed() {
+    if (key === 'r' || key === 'R') {
+        restartGame();
+    }
+}
+function restartGame() {
+    // Reset player positions and health
+    player1.x = 20;
+    player1.y = 20;
+    player1.health = 3;
 
+    player2.x = 720;
+    player2.y = 20;
+    player2.health = 3;
+
+    // Clear projectiles
+    projectiles = [];
+
+    // Reset any other game state variables as needed
+}
 function update() {
     for (let i = 0; i < projectiles.length; i++) {
         projectiles[i].update();
