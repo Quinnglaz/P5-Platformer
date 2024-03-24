@@ -122,7 +122,7 @@ class entity {
             }
             this.xvel = 0;
         }
-        this.xvel *= 0.9;
+        this.xvel *= 0.85;
 
         this.y += this.yvel;
         if (checkAllCollisions(this, platforms)) {
