@@ -23,13 +23,10 @@ var platforms = [
     {x: 600, y: 480, w: 60, h: 20},
     {x: 355, y: 400, w: 60, h: 50},
     {x: 50, y: 290, w: 100, h: 20},
-    {x: 600, y: 480, w: 60, h: 20},
+    {x: 600, y: 290, w: 100, h: 20},
     {x: 355, y: 400, w: 60, h: 50},
 ];
 var test = [8, 20];
-
-
-
 
 function setup() {
     createCanvas(800, 800);
@@ -187,8 +184,8 @@ class player extends entity {
         }
         if (keyIsDown(this.controls.shoot) && this.shootCooldown === 0) {
             let xOffset = this.dir === 0 ? this.w : -13; // Adjust the x offset based on player direction
-            let yOffset = -10; // Adjust the y offset as needed
-            projectiles.push(new entity(this.x + xOffset, this.y + yOffset, 12, 7, Math.cos(this.dir) * 100, -2, this)); // Pass the shooter as an argument
+            let yOffset = -8; // Adjust the y offset as needed
+            projectiles.push(new entity(this.x + xOffset, this.y + yOffset, 12, 7, Math.cos(this.dir) * 80, -2, this)); // Pass the shooter as an argument
             this.shootCooldown = this.shootInterval;
         }
 
