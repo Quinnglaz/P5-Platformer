@@ -122,7 +122,7 @@ class entity {
             }
             this.xvel = 0;
         }
-        this.xvel *= 0.85;
+        this.xvel *= 0.84;
 
         this.y += this.yvel;
         if (checkAllCollisions(this, platforms)) {
@@ -180,7 +180,7 @@ class player extends entity {
         }
         if (keyIsDown(this.controls.up)) {
             if (this.inGround) {
-                this.yvel = -12;
+                this.yvel = -14;
             }
         }
 
