@@ -160,14 +160,15 @@ class player extends entity {
                 i--; // Adjust index after removal
             }
         }
+        if (keyIsDown(this.controls.shoot) && this.shootCooldown === 0) {
+            let xOffset = this.dir === 0 ? this.w : -13; // Adjust the x offset based on player direction
+            let yOffset = -10; // Adjust the y offset as needed
+            projectiles.push(new entity(this.x + xOffset, this.y + yOffset, 12, 7, Math.cos(this.dir) * 100, -2, this)); // Pass the shooter as an argument
+            this.shootCooldown = this.shootInterval;
+        }
 
         if (this.health <= 0) {
             // Player is defeated - add game over logic here
-        }
-
-        if (keyIsDown(this.controls.shoot) && this.shootCooldown === 0) {
-            projectiles.push(new entity(this.x, this.y, 12, 7, Math.cos(this.dir) * 100, -2));
-            this.shootCooldown = this.shootInterval;
         }
 
         if (keyIsDown(this.controls.left)) {
@@ -187,5 +188,4 @@ class player extends entity {
         super.update();
     }
 }
-
  
