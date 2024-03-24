@@ -1,5 +1,4 @@
 
-// 1. Variable Declarations and Initialization
 var x = 20;
 var y = 20;
 var xvel = 0;
@@ -67,7 +66,7 @@ function draw() {
         rect(projectiles[i].x, projectiles[i].y, projectiles[i].w, projectiles[i].h);
     }
 
-    // Check for game over condition and change background color
+    
     if (player1.health <= 0) {
         background("yellow");
         fill("blue")
@@ -86,7 +85,7 @@ function keyPressed() {
     }
 }
 function restartGame() {
-    // Reset player positions and health
+    
     player1.x = 20;
     player1.y = 20;
     player1.health = 3;
@@ -95,10 +94,10 @@ function restartGame() {
     player2.y = 20;
     player2.health = 3;
 
-    // Clear projectiles
+    
     projectiles = [];
 
-    // Reset any other game state variables as needed
+    
 }
 function update() {
     for (let i = 0; i < projectiles.length; i++) {
@@ -144,7 +143,7 @@ class entity {
             }
             this.xvel = 0;
         }
-        this.xvel *= 0.84;
+        this.xvel *= 0.835;
 
         this.y += this.yvel;
         if (checkAllCollisions(this, platforms)) {
@@ -165,8 +164,8 @@ class player extends entity {
         super(x, y, w, h);
         this.dir = 90;
         this.controls = controls;
-        this.shootCooldown = 0; // Initialize the cooldown timer
-        this.shootInterval = 30; // Cooldown interval (in frames)
+        this.shootCooldown = 0; 
+        this.shootInterval = 30; 
         this.health = 3;
     }
 
@@ -177,20 +176,20 @@ class player extends entity {
 
         for (let i = 0; i < projectiles.length; i++) {
             if (collision(this, projectiles[i])) {
-                this.health--; // Decrease health points if hit by a projectile
-                projectiles.splice(i, 1); // Remove the projectile
-                i--; // Adjust index after removal
+                this.health--; 
+                projectiles.splice(i, 1); 
+                i--; 
             }
         }
         if (keyIsDown(this.controls.shoot) && this.shootCooldown === 0) {
-            let xOffset = this.dir === 0 ? this.w : -13; // Adjust the x offset based on player direction
-            let yOffset = -8; // Adjust the y offset as needed
+            let xOffset = this.dir === 0 ? this.w : -13; 
+            let yOffset = -8; 
             projectiles.push(new entity(this.x + xOffset, this.y + yOffset, 12, 7, Math.cos(this.dir) * 80, -2, this)); // Pass the shooter as an argument
             this.shootCooldown = this.shootInterval;
         }
 
         if (this.health <= 0) {
-            // Player is defeated - add game over logic here
+            
         }
 
         if (keyIsDown(this.controls.left)) {
