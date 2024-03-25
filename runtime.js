@@ -88,11 +88,11 @@ function restartGame() {
     
     player1.x = 20;
     player1.y = 20;
-    player1.health = 3;
+    player1.health = 5;
 
     player2.x = 720;
     player2.y = 20;
-    player2.health = 3;
+    player2.health = 5;
 
     
     projectiles = [];
@@ -143,7 +143,7 @@ class entity {
             }
             this.xvel = 0;
         }
-        this.xvel *= 0.835;
+        this.xvel *= 0.75;
 
         this.y += this.yvel;
         if (checkAllCollisions(this, platforms)) {
@@ -166,7 +166,7 @@ class player extends entity {
         this.controls = controls;
         this.shootCooldown = 0; 
         this.shootInterval = 30; 
-        this.health = 3;
+        this.health = 5;
     }
 
     update() {
